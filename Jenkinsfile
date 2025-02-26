@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Build') {
             when {
-                expression { ${env.stage} == 'All' || ${env.stage} == 'Build' }
+                expression { params.stage == 'All' || params.stage == 'Build' }
             }
             steps {
                 echo 'Building the application...'
@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Test') {
             when {
-                expression { ${env.stage} == '' || ${env.stage} == 'Test' }
+                expression { params.stage == 'All' || params.stage == 'Test' }
             }
             steps {
                 echo 'Running tests...'
@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Deploy') {
             when {
-                expression { ${env.stage} == '' || ${env.stage} == 'Deploy' }
+                expression { params.stage == 'All' || params.stage == 'Deploy' }
             }
             steps {
                 echo 'Deploying the application...'
